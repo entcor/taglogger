@@ -13,7 +13,7 @@ const processLogString = process.env.DEBUG;
 const disabledLog = !processLogString || !processLogString.length;
 const processLogTags = processLogString && processLogString.split(',').filter(el => el[0] !== '!'); // skip all starts from '!'
 
-export default function Logger(tag) {
+function Logger(tag) {
   return function (...params) {
     if (disabledLog) return;
     const lastItem = Array.isArray(params[params.length - 1]) && params[params.length - 1];
@@ -32,3 +32,5 @@ if (require.main === module) {
   const test = Logger('test');
   test('test log string', ['testlog']);
 }
+
+module.exports = Logger;
