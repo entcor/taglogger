@@ -1,0 +1,23 @@
+{
+  "name": "taglogger",
+  "version": "1.0.0",
+  "description": "tag loger for debug",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/entcor/taglogger.git"
+  },
+  "keywords": [
+    "log",
+    "node"
+  ],
+  "author": "Alexey P Nikitin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/entcor/taglogger/issues"
+  },
+  "homepage": "https://github.com/entcor/taglogger#readme"
+}
