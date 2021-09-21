@@ -1,11 +1,11 @@
-# (T)tag logger
+# (E)tag logger
 
 Simple logger for console output
 
 ## install
 
 ```javascript
-    npm i ttaglogger
+    npm i etaglogger
 ```
 
 ## usage
@@ -13,13 +13,13 @@ Simple logger for console output
 ```javascript
     // in first file:
     
-    const TagLogger = require('ttaglogger');
+    const TagLogger = require('etaglogger');
     const logd = TagLogger('file1');
     logd('test string', { data: 'test data' }, ['tag1']) // log message tagged by two tags: tag1, file1
     logd('test2 string', { data: 'test data' }, ['tag1', 'tag2']) // log message tagged by tags: tag1, tag2, file1
 
     // in second file
-    const TagLogger = require('ttaglogger');
+    const TagLogger = require('etaglogger');
     const logd = TagLogger('file2');
     ...
     logd('test3 string'); // tag: file2

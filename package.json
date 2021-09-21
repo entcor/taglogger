@@ -1,5 +1,5 @@
 {
-  "name": "ttaglogger",
+  "name": "etaglogger",
   "version": "0.0.1",
   "description": "tag loger for debug",
   "main": "index.js",

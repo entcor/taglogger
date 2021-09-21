@@ -1,7 +1,7 @@
 /*
   example:
 
-  const Logger = require('tagLogger');
+  const Logger = require('etagLogger');
   const log = Logger('snmp');
   log(string, string, ['device$123']) //  формирует лог с тэгами tagLogger & device$123
 
