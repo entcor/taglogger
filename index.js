@@ -9,9 +9,9 @@
   DEBUG=s,d,f
 */
 
-const processLogString = process.env.DEBUG;
-const disabledLog = !processLogString || !processLogString.length;
-const processLogTags = processLogString && processLogString.split(',').filter(el => el[0] !== '!'); // skip all starts from '!'
+
+const processLogTags = prepareChecker(process.env.DEBUG); // skip all starts from '!'
+const disabledLog = !processLogTags || !processLogTags.length;
 
 function Logger(tag) {
   return function (...params) {
@@ -19,7 +19,7 @@ function Logger(tag) {
     const lastItem = Array.isArray(params[params.length - 1]) && params[params.length - 1];
     const logItems = lastItem ? params.slice(0, -1) : params;
     const tags = [tag, ...(lastItem || [])];
-    if (processLogTags.some(el => tags.includes(el))){
+    if (checkTags(tags)) {
       const now = (new Date()).toLocaleString();
       const showItems = logItems
         .map(el => typeof el === 'function' ? el() : el)
@@ -30,25 +30,27 @@ function Logger(tag) {
   }
 }
 
-// function parseTest(params) {
-//   const items = [];
-//   params
-//     .split(';')
-//     .filter(el => el[0] !== '!')
-//     .map(filterRec => {
-//       const andItems = filterRec.split('&');
-//       andItems.forEach(andItem => {
-//         if (andItem is array)
-//       });
-//     });
-// }
-
-if (require.main === module) {
-  process.env.DEBUG = '!test,testlog,!a,!b';
-  const test = Logger('test');
-  test('test log string', ['testlog']);
+function checkTags(tags) {
+  return processLogTags.some(tagItem => { // tagItem = array of "and" tags
+    return tagItem.every(el => tags.includes(el));
+  })
 }
 
-// parseTest();
+function prepareChecker(debugString) {
+  if (!debugString || !debugString.length) return;
+
+  const items = debugString.split(';').filter(el => el[0] !== '!');
+  return items.map(el => {
+    const subItems = el.split(',').filter(sitem => !!sitem);
+    return subItems;
+  });
+}
+
+// if (require.main === module) {
+//   console.log('run test');
+//   process.env.DEBUG = '!test;testlog,test;!b;hahaha';
+//   const test = Logger('test');
+//   test('test log string', ['testlog']);
+// }
 
 module.exports = Logger;
